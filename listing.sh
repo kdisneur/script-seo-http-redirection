@@ -1,14 +1,12 @@
 #/bin/sh
-
 function usage {
-  printf "La commande attend un fichier existant en paramètre!\n"
   printf " usage: $0 <INPUT_FILE> <OUTPUT_FILE> [<CHUNK_SIZE>]\n"
   printf " exple: $0 ~/Desktop/liens-casses.txt ~/Desktop/results.csv \n"
 }
 
 function check_params {
-  [ -f "$1" ] || { usage; exit 1; }
-  [ -n "$2" -a ! -e $2 ] || { usage; exit 1; }
+  [ -f "$1" ] || {   printf "La commande attend un fichier d'urls en paramètre!\n"; usage; exit 1; }
+  [ -n "$2" -a ! -e $2 ] || {   printf "Le fichier passé en paramètre existe déjà!\n"; usage; exit 1; }
   [ -n "$3" ] || { export chunk_size=10; printf "default chunk size used: ${chunk_size}\n"; }
 }
 
